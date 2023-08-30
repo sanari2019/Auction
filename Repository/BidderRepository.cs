@@ -1,7 +1,7 @@
 using RepoDb;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +26,8 @@ public class BidderRepository: BaseRepository<Bidder, SqlConnection>
         public  void insertBidder(Bidder bida)
         {
             //UserRepository usrrepository = new UserRepository(cstring.ConString);
+            bida.fLoginDate=DateTime.Now;
+            bida.lLoginDate=DateTime.Now;
             this.Insert(bida);
         }
         public  void updateBidder(Bidder bida)

@@ -1,5 +1,5 @@
 
-// using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -10,23 +10,23 @@ var builder = WebApplication.CreateBuilder(args);
 //         .GetSection("EmailConfiguration")
 //         .Get<EmailConfiguration>();
 // builder.Services.AddSingleton(emailConfig);
-// builder.Services.AddAuthentication(opt => {
-//     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-// })
-//     .AddJwtBearer(options =>
-//     {
-//         options.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateIssuer = true,
-//             ValidateAudience = true,
-//             ValidateLifetime = true,
-//             ValidateIssuerSigningKey = true,
-//             ValidIssuer = "https://localhost:7146",
-//             ValidAudience = "https://localhost:7146",
-//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
-//         };
-//     });
+builder.Services.AddAuthentication(opt => {
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "https://localhost:7146",
+            ValidAudience = "https://localhost:7146",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ByYM000OLlMQG6VVVp1OH7Xzyr7gHuw1qvUC5dcGt3SNM"))
+        };
+    });
 builder.Services.AddControllers();
 // builder.Services.AddScoped<IEmailSender, EmailSender>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -41,6 +41,7 @@ builder.Services.AddSingleton<Setting>(setting);
 Setting.initializeRepoDb();
 builder.Services.AddSingleton<BidRepository>();
 builder.Services.AddSingleton<VehicleImageRepository>();
+builder.Services.AddSingleton<BidderRepository>();
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
