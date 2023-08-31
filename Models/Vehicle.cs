@@ -14,4 +14,6 @@ public class Vehicle
     public bool gearBoxState { get; set; }
     public string engine { get; set; }
     public string suspension { get; set; }
+    public int bidid { get; set; }
+    public Bid bid { get; set; }
 }
