@@ -10,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 //         .GetSection("EmailConfiguration")
 //         .Get<EmailConfiguration>();
 // builder.Services.AddSingleton(emailConfig);
-builder.Services.AddAuthentication(opt => {
+builder.Services.AddAuthentication(opt =>
+{
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
@@ -29,6 +30,12 @@ builder.Services.AddAuthentication(opt => {
     });
 builder.Services.AddControllers();
 // builder.Services.AddScoped<IEmailSender, EmailSender>();
+var emailConfig = builder.Configuration
+        .GetSection("EmailConfiguration")
+        .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddControllers();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -42,6 +49,7 @@ Setting.initializeRepoDb();
 builder.Services.AddSingleton<BidRepository>();
 builder.Services.AddSingleton<VehicleImageRepository>();
 builder.Services.AddSingleton<BidderRepository>();
+builder.Services.AddSingleton<BidDetailsRepository>();
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
@@ -51,7 +59,7 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost",
             "http://localhost:4200",
             "https://localhost:7230",
-            "http://10.20.20.104:2020",
+            "http://10.20.20.105:8080",
             "http://localhost:90")
         .AllowAnyMethod()
         .AllowAnyHeader()
@@ -70,7 +78,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("EnableCORS");
+// app.UseCors("EnableCORS");
 app.UseAuthentication();
 app.UseAuthorization();
 

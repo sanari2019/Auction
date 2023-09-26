@@ -7,12 +7,12 @@ public class VehicleImageController : ControllerBase
 {
 
     VehicleImageRepository _repVehicleImage;
-    int idvalue=0;
-   
+    int idvalue = 0;
+
     public VehicleImageController(VehicleImageRepository repVehicleImage)
     {
-        this._repVehicleImage =repVehicleImage;
-        
+        this._repVehicleImage = repVehicleImage;
+
     }
     // GET: api/Cities
     [HttpGet]
@@ -21,11 +21,17 @@ public class VehicleImageController : ControllerBase
         return new OkObjectResult(_repVehicleImage.GetVehicleImages());
     }
     // GET: api/Cities/5
-    [HttpGet("{id}")]
+    [HttpGet("{vehicleId}")]
     public async Task<ActionResult<VehicleImage>> GetImagesbyVehicleId(int vehicleId)
     {
         return new OkObjectResult(_repVehicleImage.GetImagesbyVehicleId(vehicleId));
 
+    }
+    // GET: api/VehicleImage/default
+    [HttpGet("default")]
+    public IEnumerable<VehicleImage> GetDefaultImages()
+    {
+        return _repVehicleImage.GetDefaultVehicleImages();
     }
 
     [HttpPost("{id}")]
@@ -110,6 +116,6 @@ public class VehicleImageController : ControllerBase
         idvalue = _repVehicleImage.deleteVehicleImage(vehicleimage);
         return Ok(vehicleimage);
     }
-   
+
 
 }

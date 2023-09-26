@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\olusola.omotoso\\Documents\\Angular\\Auction\\Auction.csproj": {}
+    "C:\\Users\\Samuel.anari\\Auction\\Auction-1\\Auction.csproj": {}
   },
   "projects": {
-    "C:\\Users\\olusola.omotoso\\Documents\\Angular\\Auction\\Auction.csproj": {
+    "C:\\Users\\Samuel.anari\\Auction\\Auction-1\\Auction.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olusola.omotoso\\Documents\\Angular\\Auction\\Auction.csproj",
+        "projectUniqueName": "C:\\Users\\Samuel.anari\\Auction\\Auction-1\\Auction.csproj",
         "projectName": "Auction",
-        "projectPath": "C:\\Users\\olusola.omotoso\\Documents\\Angular\\Auction\\Auction.csproj",
-        "packagesPath": "C:\\Users\\olusola.omotoso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olusola.omotoso\\Documents\\Angular\\Auction\\obj\\",
+        "projectPath": "C:\\Users\\Samuel.anari\\Auction\\Auction-1\\Auction.csproj",
+        "packagesPath": "C:\\Users\\Samuel.anari\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Samuel.anari\\Auction\\Auction-1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\olusola.omotoso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Samuel.anari\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files\\dotnet\\sdk\\7.0.308\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,6 +39,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.12, )"
@@ -49,6 +54,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[6.32.2, )"
+            },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             },
             "RepoDb.SqlServer": {
               "target": "Package",
@@ -85,7 +94,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -97,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.308\\RuntimeIdentifierGraph.json"
         }
       }
     }
