@@ -83,14 +83,20 @@ public class VehicleImageRepository : BaseRepository<VehicleImage, SqlConnection
         var vehicleImages = new List<VehicleImage>();
         using (var connection = new SqlConnection(sett.ConString))
         {
-            vehicleImages = connection.Query<VehicleImage>(new { defaultImage = true }).ToList();
+            var sql = "SELECT * FROM [Auction].[dbo].[VehicleImage] WHERE defaultImage = 1";
+            vehicleImages = connection.ExecuteQuery<VehicleImage>(sql).ToList();
             foreach (VehicleImage vehicleimage in vehicleImages)
             {
-                vehicleimage.vehicle = connection.Query<Vehicle>(vehicleimage.vehicleId).FirstOrDefault();
+                  var sql2 = "SELECT * FROM [Auction].[dbo].[Vehicle] WHERE id = @Id";
+            // Provide parameter value using an anonymous object or a Dictionary<string, object>
+                var parameters = new { Id = vehicleimage.vehicleId };
+                vehicleimage.vehicle = connection.ExecuteQuery<Vehicle>(sql2, parameters).FirstOrDefault();
                 if (vehicleimage.vehicle != null)
-                {
-                    vehicleimage.vehicle.bid = connection.Query<Bid>(vehicleimage.vehicle.bidid).FirstOrDefault();
-                }
+                    {
+                        var sql3 = "SELECT * FROM [Auction].[dbo].[Bid] WHERE id = @Id";
+                        var parameters2 = new { Id = vehicleimage.vehicle.bidid };
+                        vehicleimage.vehicle.bid = connection.ExecuteQuery<Bid>(sql3, parameters2).FirstOrDefault();
+                    }
             }
             // Use RepoDb's Query method to filter by defaultImage = true
             return vehicleImages;

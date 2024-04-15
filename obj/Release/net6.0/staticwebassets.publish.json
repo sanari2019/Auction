@@ -1,11 +1,54 @@
 {
   "Version": 1,
-  "Hash": "YwqVwpZnVs3M2pjBK4BtKzb2dWHJDpgPt0T4eUCYnKY=",
+  "Hash": "MMr9JjYtCiZa9hwDcGssn4VRGdueiZEf6eJAE4M8Xg0=",
   "Source": "Auction",
   "BasePath": "_content/Auction",
   "Mode": "Default",
   "ManifestType": "Publish",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Auction\\wwwroot",
+      "Source": "Auction",
+      "ContentRoot": "D:\\Users\\Public\\Documents\\Auction\\wwwroot\\",
+      "BasePath": "_content/Auction",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Users\\Public\\Documents\\Auction\\wwwroot\\images\\200amp.jpg",
+      "SourceId": "Auction",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Users\\Public\\Documents\\Auction\\wwwroot\\",
+      "BasePath": "_content/Auction",
+      "RelativePath": "images/200amp.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\200amp.jpg"
+    },
+    {
+      "Identity": "D:\\Users\\Public\\Documents\\Auction\\wwwroot\\images\\40amp.jpg",
+      "SourceId": "Auction",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Users\\Public\\Documents\\Auction\\wwwroot\\",
+      "BasePath": "_content/Auction",
+      "RelativePath": "images/40amp.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\40amp.jpg"
+    }
+  ]
 }

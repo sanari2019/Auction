@@ -32,8 +32,15 @@ public class BidderRepository : BaseRepository<Bidder, SqlConnection>
     }
     public void updateBidder(Bidder bida)
     {
+        using (var connection = new SqlConnection(sett.ConString))
+        {
+       
+        var sql = "UPDATE [Auction].[dbo].[Bidder] SET password = @password, llogindate=getdate() WHERE id = @id";
+        connection.ExecuteQuery(sql, new { password = bida.password, id = bida.id });
 
-        this.Update(bida);
+        // Optionally, you can log a message indicating a successful update
+        Console.WriteLine("Bidder updated successfully.");
+        }
     }
     public int deleteBidder(Bidder bida)
     {
@@ -47,7 +54,8 @@ public class BidderRepository : BaseRepository<Bidder, SqlConnection>
         var bidders = new List<Bidder>();
         using (var connection = new SqlConnection(sett.ConString))
         {
-            bidders = connection.QueryAll<Bidder>().ToList();
+            var sql = "SELECT * FROM [Auction].[dbo].[Bidder]";
+            bidders = connection.ExecuteQuery<Bidder>(sql).ToList();
             /* Do the stuffs for the people here */
         }
         return bidders;
@@ -58,8 +66,8 @@ public class BidderRepository : BaseRepository<Bidder, SqlConnection>
         var bidder = new Bidder();
         using (var connection = new SqlConnection(sett.ConString))
         {
-
-            bidder = connection.Query<Bidder>(id).FirstOrDefault();
+            var sql = "SELECT TOP 1 * FROM [Auction].[dbo].[Bidder] WHERE id = @id";
+            bidder = connection.ExecuteQuery<Bidder>(sql, new { id }).FirstOrDefault();
         }
         return bidder;
     }
@@ -69,7 +77,8 @@ public class BidderRepository : BaseRepository<Bidder, SqlConnection>
         var bidder = new Bidder();
         using (var connection = new SqlConnection(sett.ConString))
         {
-            bidder = connection.Query<Bidder>(e => e.username == username).FirstOrDefault();
+            var sql = "SELECT TOP 1 * FROM [Auction].[dbo].[Bidder] WHERE username = @username";
+            bidder = connection.ExecuteQuery<Bidder>(sql, new { username }).FirstOrDefault();
         }
         return bidder;
     }

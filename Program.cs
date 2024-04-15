@@ -49,6 +49,8 @@ Setting.initializeRepoDb();
 builder.Services.AddSingleton<BidRepository>();
 builder.Services.AddSingleton<VehicleImageRepository>();
 builder.Services.AddSingleton<BidderRepository>();
+builder.Services.AddSingleton<BidItemRepository>();
+builder.Services.AddSingleton<ItemImageRepository>();
 builder.Services.AddSingleton<BidDetailsRepository>();
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>

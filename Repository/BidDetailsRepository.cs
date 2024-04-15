@@ -26,7 +26,33 @@ public class BidDetailsRepository : BaseRepository<BidDetails, SqlConnection>
     public void insertBidDetails(BidDetails biddetails)
     {
         //UserRepository usrrepository = new UserRepository(cstring.ConString);
-        this.Insert(biddetails);
+         // Create a SQL connection using your connection string
+    using (var connection = new SqlConnection(sett.ConString))
+    {
+        connection.Open(); // Open the connection
+
+        // Create the SQL command with parameterized values to prevent SQL injection
+        var sql = @"INSERT INTO [Auction].[dbo].[BidDetails] 
+                        ([bidid], [vehicleid], [itemid], [staffid], [staffbid], [biddate]) 
+                        VALUES 
+                        (@bidid, @vehicleid, @itemid, @staffid, @staffbid, @biddate)";
+
+        // Create a SQL command object with the SQL command and connection
+        using (var command = new SqlCommand(sql, connection))
+        {
+            // Set parameter values based on the bidItem object
+            command.Parameters.AddWithValue("@bidid", biddetails.bidId);
+            command.Parameters.AddWithValue("@vehicleid", biddetails.vehicleId);
+            command.Parameters.AddWithValue("@itemid", biddetails.itemId);
+            command.Parameters.AddWithValue("@staffid", biddetails.staffId);
+            command.Parameters.AddWithValue("@staffbid", biddetails.staffBid);
+            command.Parameters.AddWithValue("@biddate", biddetails.bidDate);
+
+            // Execute the SQL command to insert the data
+            command.ExecuteNonQuery();
+        }
+    }
+        // this.Insert(biddetails);
     }
     public void updateBiddetails(BidDetails biddetails)
     {
@@ -73,6 +99,17 @@ public class BidDetailsRepository : BaseRepository<BidDetails, SqlConnection>
         }
         return biddetailss;
     }
+     public List<BidDetails> GetBidDetailsByItem(int itemId)
+    {
+
+        var biddetailss = new List<BidDetails>();
+        using (var connection = new SqlConnection(sett.ConString))
+        {
+            biddetailss = connection.ExecuteQuery<BidDetails>("SELECT * FROM [Auction].[dbo].[Biddetails] B WHERE B.itemId= @itemId", new { itemId = itemId }).ToList();
+            /* Do the stuffs for the people here */
+        }
+        return biddetailss;
+    }
 
 
     public BidDetails GetBidDetailsByBidder(int staffId)
@@ -94,12 +131,7 @@ public class BidDetailsRepository : BaseRepository<BidDetails, SqlConnection>
         using (var connection = new SqlConnection(sett.ConString))
         {
             // Adjust the SQL query to select the most recent bid for a specific staffId and vehicleId based on 'id'
-            string query = @"
-            SELECT TOP 1 B.*
-            FROM [dbo].[Biddetails] B
-            WHERE B.staffid = @staffId AND B.vehicleid = @vehicleId
-            ORDER BY B.id DESC
-        ";
+            var query = "SELECT TOP 1 B.* FROM [Auction].[dbo].[Biddetails] B WHERE B.staffid = @staffId AND B.vehicleid = @vehicleId ORDER BY B.id DESC";
 
             // Use Dapper to execute the query and retrieve the first (most recent) result
             var result = connection.ExecuteQuery<BidDetails>(query, new { staffId, vehicleId });
@@ -108,6 +140,24 @@ public class BidDetailsRepository : BaseRepository<BidDetails, SqlConnection>
 
         return latestBid;
     }
+
+    public BidDetails? GetLatestBeedByBidderAndVehicle(int staffId, int itemId)
+    {
+        BidDetails? latestBid = null;
+
+        using (var connection = new SqlConnection(sett.ConString))
+        {
+            // Adjust the SQL query to select the most recent bid for a specific staffId and vehicleId based on 'id'
+            var query = "SELECT TOP 1 B.* FROM [Auction].[dbo].[Biddetails] B WHERE B.staffId = @staffId AND B.itemId = @itemId ORDER BY B.id DESC";
+            var parameter = new { staffId = @staffId, itemId=@itemId};
+            // Use Dapper to execute the query and retrieve the first (most recent) result
+            var result = connection.ExecuteQuery<BidDetails>(query, parameter).FirstOrDefault();
+            latestBid = result;
+        }
+
+        return latestBid;
+    }
+
 
 
 

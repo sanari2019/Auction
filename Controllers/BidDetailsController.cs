@@ -54,6 +54,16 @@ public class BidDetailsController : ControllerBase
         }
         return Ok(bidDetails);
     }
+    [HttpGet("getbiddetailsi/{itemId}")]
+    public async Task<ActionResult> GetBidDetailsByItem(int itemId)
+    {
+        var bidDetails = _repository.GetBidDetailsByItem(itemId);
+        if (bidDetails == null)
+        {
+            return NotFound();
+        }
+        return Ok(bidDetails);
+    }
     [HttpGet("getbiddetail/{bidderId}")]
     public async Task<ActionResult> GetBidDetailsByBidder(int bidderId)
     {
@@ -67,6 +77,24 @@ public class BidDetailsController : ControllerBase
     {
         // Call your data access method to retrieve the latest bid
         var latestBid = _repository.GetLatestBidByBidderAndVehicle(staffId, vehicleId);
+
+        if (latestBid != null)
+        {
+            // If a bid is found, return it as a 200 OK response
+            return Ok(latestBid);
+        }
+        else
+        {
+            // If no bid is found, return a 404 Not Found response
+            return NotFound();
+        }
+    }
+
+     [HttpGet("latestBeed")]
+    public IActionResult GetLatestBeed(int staffId, int itemId)
+    {
+        // Call your data access method to retrieve the latest bid
+        var latestBid = _repository.GetLatestBeedByBidderAndVehicle(staffId, itemId);
 
         if (latestBid != null)
         {

@@ -5034,11 +5034,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Samuel.anari\\Auction\\Auction-1\\Auction.csproj",
+      "projectUniqueName": "D:\\Users\\Public\\Documents\\Auction\\Auction.csproj",
       "projectName": "Auction",
-      "projectPath": "C:\\Users\\Samuel.anari\\Auction\\Auction-1\\Auction.csproj",
+      "projectPath": "D:\\Users\\Public\\Documents\\Auction\\Auction.csproj",
       "packagesPath": "C:\\Users\\Samuel.anari\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Samuel.anari\\Auction\\Auction-1\\obj\\",
+      "outputPath": "D:\\Users\\Public\\Documents\\Auction\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Samuel.anari\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -5047,7 +5047,7 @@
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files\\dotnet\\sdk\\7.0.308\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.315\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5134,7 +5134,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.308\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.315\\RuntimeIdentifierGraph.json"
       }
     }
   }
